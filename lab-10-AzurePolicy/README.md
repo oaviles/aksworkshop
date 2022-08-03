@@ -51,10 +51,11 @@ Select the Assign button at the top-left corner of the screen.
 Set the Scope to the resource group of the Kubernetes cluster you created, which in this case is the videogamerg. Fill out the rest of the form as you did in the previous step and click Review + create.
 Click the Create button.
 
-ACR_NAME=<<Name of your ACR>>
+ACR_NAME=<< Name of your ACR >>
 
 az aks update -n AKSCluster-Demo -g IaC_Workshop --attach-acr $ACR_NAME
 
+kubectl get ConstraintTemplates
 
 ------------- Check compliance status using Azure Policy  -------------
 
