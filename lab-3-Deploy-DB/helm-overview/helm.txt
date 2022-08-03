@@ -1,0 +1,25 @@
+Install existing applications with Helm in Azure Kubernetes Service (AKS)
+
+https://docs.microsoft.com/en-us/azure/aks/kubernetes-helm
+
+helm repo list
+
+Find Helm charts:
+helm search repo stable
+helm search repo bitnami
+
+https://hub.helm.sh/
+
+helm search hub | wc -l
+
+helm search hub mongo
+helm search hub redis
+
+helm search hub mongo | grep bitnami
+
+helm create mychart
+helm install mychart mychart/ --values mychart/values.yaml
+
+Push and pull Helm charts to an Azure container registry:
+https://docs.microsoft.com/en-us/azure/container-registry/container-registry-helm-repos
+

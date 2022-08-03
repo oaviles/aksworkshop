@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  MONGOCONNECTION: bW9uZ29kYjovL29hdmlsZXM6UHdkMDFAcmF0aW5ncy1tb25nb2RiLnJhdGluZ3NhcHA6MjcwMTcvcmF0aW5nc2Ri
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: mongosecret
+  namespace: ratingsapp

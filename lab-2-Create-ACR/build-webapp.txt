@@ -1,0 +1,8 @@
+git clone https://github.com/MicrosoftDocs/mslearn-aks-workshop-ratings-web.git
+
+az acr build \
+    --resource-group $RESOURCE_GROUP \
+    --registry $ACR_NAME \
+    --image ratings-web:v1 .
+
+https://docs.microsoft.com/en-us/cli/azure/acr?view=azure-cli-latest#az-acr-show

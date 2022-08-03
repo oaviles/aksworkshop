@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: api
+  name: api
+  namespace: ratingsapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: api
+    spec:
+      containers:
+      - image: acr692.azurecr.io/api:latest
+        name: api
+        ports:
+        - containerPort: 7999
+        resources:
+          requests:
+            memory: "16Mi"
+            cpu: "250m"
+          limits:
+            memory: "64Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: api
+  name: api
+  namespace: ratingsapp
+spec:
+  ports:
+  - name: 7999-80
+    port: 80
+    protocol: TCP
+    targetPort: 7999
+  selector:
+    app: api
+    protocol: TCP
+  type: LoadBalancer

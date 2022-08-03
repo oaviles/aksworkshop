@@ -1,0 +1,10 @@
+az aks update \
+    --name $AKS_CLUSTER_NAME \
+    --resource-group $RESOURCE_GROUP \
+    --attach-acr $ACR_NAME
+
+https://docs.microsoft.com/en-us/azure/aks/cluster-container-registry-integration
+
+
+Import an image into your ACR:
+az acr import  -n <acr-name> --source docker.io/library/nginx:latest --image nginx:v1

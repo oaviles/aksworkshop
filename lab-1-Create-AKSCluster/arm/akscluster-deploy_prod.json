@@ -1,0 +1,217 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualNetworks_aks_vnet_name": {
+            "defaultValue": "aks-vnet",
+            "type": "String"
+        },
+        "managedClusters_aksworkshop_8901_name": {
+            "defaultValue": "aksworkshop-8901",
+            "type": "String"
+        },
+        "applicationGateways_IngressApplicationGateway_externalid": {
+            "defaultValue": "/subscriptions/38799598-962d-47e5-beb0-e391ff1577a1/resourceGroups/MC_aksworkshop_zone_aksworkshop-8901_eastus/providers/Microsoft.Network/applicationGateways/IngressApplicationGateway",
+            "type": "String"
+        },
+        "publicIPAddresses_08ad6d90_cb64_4a45_8795_52cdebc276ba_externalid": {
+            "defaultValue": "/subscriptions/38799598-962d-47e5-beb0-e391ff1577a1/resourceGroups/MC_aksworkshop_zone_aksworkshop-8901_eastus/providers/Microsoft.Network/publicIPAddresses/08ad6d90-cb64-4a45-8795-52cdebc276ba",
+            "type": "String"
+        },
+        "userAssignedIdentities_aksworkshop_8901_agentpool_externalid": {
+            "defaultValue": "/subscriptions/38799598-962d-47e5-beb0-e391ff1577a1/resourceGroups/MC_aksworkshop_zone_aksworkshop-8901_eastus/providers/Microsoft.ManagedIdentity/userAssignedIdentities/aksworkshop-8901-agentpool",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2020-05-01",
+            "name": "[parameters('virtualNetworks_aks_vnet_name')]",
+            "location": "eastus",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/8"
+                    ]
+                },
+                "dhcpOptions": {
+                    "dnsServers": []
+                },
+                "subnets": [
+                    {
+                        "name": "aks-subnet",
+                        "properties": {
+                            "addressPrefix": "10.240.0.0/16",
+                            "delegations": [],
+                            "privateEndpointNetworkPolicies": "Enabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled"
+                        }
+                    }
+                ],
+                "virtualNetworkPeerings": [],
+                "enableDdosProtection": false,
+                "enableVmProtection": false
+            }
+        },
+        {
+            "type": "Microsoft.ContainerService/managedClusters",
+            "apiVersion": "2020-07-01",
+            "name": "[parameters('managedClusters_aksworkshop_8901_name')]",
+            "location": "eastus",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_aks_vnet_name'), 'aks-subnet')]"
+            ],
+            "sku": {
+                "name": "Basic",
+                "tier": "Paid"
+            },
+            "identity": {
+                "principalId": "a316d4b8-7483-4ce1-9243-cf839edad2a9",
+                "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "kubernetesVersion": "1.18.8",
+                "dnsPrefix": "aksworksho-aksworkshopzone-387995",
+                "agentPoolProfiles": [
+                    {
+                        "name": "nodepool1",
+                        "count": 3,
+                        "vmSize": "Standard_DS2_v2",
+                        "osDiskSizeGB": 128,
+                        "vnetSubnetID": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_aks_vnet_name'), 'aks-subnet')]",
+                        "maxPods": 30,
+                        "type": "VirtualMachineScaleSets",
+                        "availabilityZones": [
+                            "1",
+                            "2",
+                            "3"
+                        ],
+                        "maxCount": 6,
+                        "minCount": 3,
+                        "enableAutoScaling": true,
+                        "orchestratorVersion": "1.18.8",
+                        "enableNodePublicIP": false,
+                        "nodeLabels": {},
+                        "mode": "System",
+                        "osType": "Linux"
+                    }
+                ],
+                "linuxProfile": {
+                    "adminUsername": "azureuser",
+                    "ssh": {
+                        "publicKeys": [
+                            {
+                                "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDPfCoEqPIgKHETgGOvZLf/s4rJtW+B+MwiKRtM+9mu3g+Nb69ywebT/dxZnr/kbpoB8XiwxRRDvyP3b5Sal2xWGLp9LckNdr9VPU7vOjZjt9klCMa++QB8BhSlOj4DurmRNV/3XAQpIN1InAlbzkh+RR0TR/mR9KQLC7Pl8QVcQzrWqNX0gELWfjFBFRg2I1GDGYqMeG7ZwIkgF/83kUM9y/GKTCRe2Qt4Wfg0CvpVZzoYh3gemPwjjDlF/u/798ET3ZMrWq0rOIPwyZ/jIIlPP4vKv8IZaZ41vpbc+f5pTQ2LxEaguj0jy93UfR0rwTXT4twc7JXf1rLWVrgvtLKv"
+                            }
+                        ]
+                    }
+                },
+                "windowsProfile": {
+                    "adminUsername": "azureuser"
+                },
+                "servicePrincipalProfile": {
+                    "clientId": "msi"
+                },
+                "addonProfiles": {
+                    "KubeDashboard": {
+                        "enabled": false
+                    },
+                    "ingressApplicationGateway": {
+                        "enabled": true,
+                        "config": {
+                            "applicationGatewayName": "IngressApplicationGateway",
+                            "effectiveApplicationGatewayId": "[parameters('applicationGateways_IngressApplicationGateway_externalid')]",
+                            "subnetPrefix": "10.2.0.0/16"
+                        }
+                    }
+                },
+                "nodeResourceGroup": "[concat('MC_aksworkshop_zone_', parameters('managedClusters_aksworkshop_8901_name'), '_eastus')]",
+                "enableRBAC": true,
+                "enablePodSecurityPolicy": false,
+                "networkProfile": {
+                    "networkPlugin": "azure",
+                    "loadBalancerSku": "Standard",
+                    "loadBalancerProfile": {
+                        "managedOutboundIPs": {
+                            "count": 1
+                        },
+                        "effectiveOutboundIPs": [
+                            {
+                                "id": "[parameters('publicIPAddresses_08ad6d90_cb64_4a45_8795_52cdebc276ba_externalid')]"
+                            }
+                        ]
+                    },
+                    "serviceCidr": "10.3.0.0/24",
+                    "dnsServiceIP": "10.3.0.10",
+                    "dockerBridgeCidr": "172.17.0.1/16",
+                    "outboundType": "loadBalancer"
+                },
+                "identityProfile": {
+                    "kubeletidentity": {
+                        "resourceId": "[parameters('userAssignedIdentities_aksworkshop_8901_agentpool_externalid')]",
+                        "clientId": "e7851cda-aec9-4ad4-812d-1b0af4560bf1",
+                        "objectId": "357679f7-39ca-4558-b4b4-2dfbe98dc134"
+                    }
+                },
+                "autoScalerProfile": {
+                    "balance-similar-node-groups": "false",
+                    "max-graceful-termination-sec": "600",
+                    "scale-down-delay-after-add": "10m",
+                    "scale-down-delay-after-delete": "10s",
+                    "scale-down-delay-after-failure": "3m",
+                    "scale-down-unneeded-time": "10m",
+                    "scale-down-unready-time": "20m",
+                    "scale-down-utilization-threshold": "0.5",
+                    "scan-interval": "10s"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2020-05-01",
+            "name": "[concat(parameters('virtualNetworks_aks_vnet_name'), '/aks-subnet')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_aks_vnet_name'))]"
+            ],
+            "properties": {
+                "addressPrefix": "10.240.0.0/16",
+                "delegations": [],
+                "privateEndpointNetworkPolicies": "Enabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+        },
+        {
+            "type": "Microsoft.ContainerService/managedClusters/agentPools",
+            "apiVersion": "2020-07-01",
+            "name": "[concat(parameters('managedClusters_aksworkshop_8901_name'), '/nodepool1')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.ContainerService/managedClusters', parameters('managedClusters_aksworkshop_8901_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_aks_vnet_name'), 'aks-subnet')]"
+            ],
+            "properties": {
+                "count": 3,
+                "vmSize": "Standard_DS2_v2",
+                "osDiskSizeGB": 128,
+                "vnetSubnetID": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_aks_vnet_name'), 'aks-subnet')]",
+                "maxPods": 30,
+                "type": "VirtualMachineScaleSets",
+                "availabilityZones": [
+                    "1",
+                    "2",
+                    "3"
+                ],
+                "maxCount": 6,
+                "minCount": 3,
+                "enableAutoScaling": true,
+                "orchestratorVersion": "1.18.8",
+                "enableNodePublicIP": false,
+                "nodeLabels": {},
+                "mode": "System",
+                "osType": "Linux"
+            }
+        }
+    ]
+}

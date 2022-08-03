@@ -1,0 +1,15 @@
+az aks create \
+    --resource-group PoC-DXC \
+    --name AKSPoCCluster \
+    --generate-ssh-keys \
+    --vm-set-type VirtualMachineScaleSets \
+    --load-balancer-sku standard \
+    --node-count 3 \
+    --zones 1 2 3 \
+    --enable-rbac -r \
+    --node-vm-size Standard_DS1_v2 \
+    --enable-cluster-autoscaler \
+    --max-count 5 \
+    --min-count 3 \
+    --enable-addons monitoring \
+    --uptime-sla

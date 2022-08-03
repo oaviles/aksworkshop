@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "clusterName": {
+      "value": "myakscluster"
+    },
+    "location": {
+      "value": "eastus2"
+    },
+    "dnsPrefix": {
+      "value": "myakscluster"
+    },
+    "osDiskSizeGB": {
+      "value": 0
+    },
+    "agentCount": {
+      "value": 2
+    },
+    "agentVMSize": {
+      "value": "Standard_DS2_v2"
+    },
+    "linuxAdminUsername": {
+      "value": "azureuser"
+    },
+    "sshRSAPublicKey": {
+      "value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC2jMIAn4cLG4OP52d5YGgehC/7K7aXtKZGs7fC4NTAV5ZbwQa+7blyQtEUYzzBgBTDhFSCR2iZyYHMU6wIeB2DzRSu6ipDEf01ltdXqDZqKW1OJsHy2gPVvaWZZVSXTBpSgohPzdCbNR+AQ10euhQZnHlI05uNFKbl1BTxh9GJBpMtpc0xrVQmEMXbsQOORgeBq2de9TAqKnCRNOEG4XP98yYbKC53Na3JCl+Y4qcYI8F21C545ZCWNZAXYMYKHtleGHXZmcluGbiUsteoiZlpvToQACHdZJXaXs+F40bskD9CRwL5stEVTzduODU7ODDyE0iS20CBqTOmX8eOHM4p omar@cc-96724f19-79798cf445-lmptf"
+    },
+    "servicePrincipalClientId": {
+      "value": "c3459475-e846-4905-b199-63c264928421"
+    },
+    "servicePrincipalClientSecret": {
+      "value": "0QT4qx-qg-BlLld5Ur61dyWfyoX03zVE.1"
+    },
+    "osType": {
+      "value": "Linux"
+    }
+  }
+}

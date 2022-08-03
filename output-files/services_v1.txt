@@ -1,0 +1,10 @@
+NAME                   TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)          AGE    SELECTOR
+bfybapp                LoadBalancer   10.0.100.55    52.186.164.7     80:31410/TCP     82d    k8s-app=bfybapp
+captureorder           LoadBalancer   10.0.148.86    40.71.237.59     80:32566/TCP     155d   app=captureorder
+frontend               ClusterIP      10.0.229.192   <none>           80/TCP           155d   app=frontend
+helmappdemo            LoadBalancer   10.0.72.162    52.151.244.143   80:31772/TCP     54d    app.kubernetes.io/instance=helmappdemo,app.kubernetes.io/name=helmappdemo
+javawebapp-v1          LoadBalancer   10.0.36.171    52.224.27.161    80:31486/TCP     20d    app=javawebapp-v1
+knote-jsv1             LoadBalancer   10.0.215.249   40.88.49.151     8080:30833/TCP   125d   app=knote-jsv1
+kubernetes             ClusterIP      10.0.0.1       <none>           443/TCP          155d   <none>
+netcoreangularapp      LoadBalancer   10.0.134.249   52.224.20.183    80:31803/TCP     78d    k8s-app=netcoreangularapp
+orders-mongo-mongodb   ClusterIP      10.0.188.201   <none>           27017/TCP        155d   app=mongodb,release=orders-mongo

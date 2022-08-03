@@ -1,0 +1,74 @@
+https://docs.microsoft.com/en-us/cli/azure/aks?view=azure-cli-latest#az_aks_enable_addons
+
+az aks enable-addons --addons virtual-node --name MyManagedCluster --resource-group MyResourceGroup --subnet MySubnetName
+
+_________________________________________________________________________________________________________________________
+
+https://docs.microsoft.com/en-us/azure/aks/virtual-nodes-cli
+
+REGION_NAME=eastus
+RESOURCE_GROUP=IaC_Workshop
+VNET_NAME=myVnet
+SUBNET_AKS=myAKSSubnet
+SUBNET_VIRTUALNODES=myVirtualNodeSubnet
+
+az group create \
+    --name $RESOURCE_GROUP \
+    --location $REGION_NAME
+
+az network vnet create \
+    --resource-group $RESOURCE_GROUP \
+    --name $VNET_NAME \
+    --address-prefixes 10.0.0.0/8 \
+    --subnet-name $SUBNET_AKS \
+    --subnet-prefix 10.240.0.0/16
+
+az network vnet subnet create \
+    --resource-group $RESOURCE_GROUP \
+    --vnet-name $VNET_NAME \
+    --name $SUBNET_VIRTUALNODES \
+    --address-prefixes 10.241.0.0/16
+
+az ad sp create-for-rbac --skip-assignment
+
+VNET_ID=$(az network vnet show --resource-group $RESOURCE_GROUP --name $VNET_NAME --query id -o tsv)
+
+az role assignment create --assignee d011d8c8-17b3-4735-a00e-aef90e487cdb --scope $VNET_ID --role Contributor
+
+VERSION=$(az aks get-versions \
+    --location $REGION_NAME \
+    --query 'orchestrators[?!isPreview] | [-1].orchestratorVersion' \
+    --output tsv)
+
+VERSION=1.18.19
+
+AKS_CLUSTER_NAME=aksworkshop-$RANDOM
+AKS_CLUSTER_NAME=AKSCluster-Demo
+
+SUBNET_ID=$(az network vnet subnet show --resource-group $RESOURCE_GROUP --vnet-name $VNET_NAME --name $SUBNET_AKS --query id -o tsv)
+
+--------- Create AKS Cluster ----------- 
+
+az aks create \
+    --resource-group $RESOURCE_GROUP \
+    --name $AKS_CLUSTER_NAME \
+    --node-count 1 \
+    --kubernetes-version $VERSION \
+    --network-plugin azure \
+    --service-cidr 10.0.0.0/16 \
+    --dns-service-ip 10.0.0.10 \
+    --docker-bridge-address 172.17.0.1/16 \
+    --vnet-subnet-id $SUBNET_ID \
+    --service-principal d011d8c8-17b3-4735-a00e-aef90e487cdb \
+    --client-secret aFKIDicpZaLBqKk.7g~1T8qJsjQ0OB5ZO.
+
+---------------------------------------
+
+
+az aks enable-addons \
+    --resource-group $RESOURCE_GROUP \
+    --name $AKS_CLUSTER_NAME \
+    --addons virtual-node \
+    --subnet-name $SUBNET_VIRTUALNODES
+
+az aks get-credentials --resource-group $RESOURCE_GROUP --name $AKS_CLUSTER_NAME

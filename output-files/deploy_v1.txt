@@ -1,0 +1,9 @@
+NAME                   READY   UP-TO-DATE   AVAILABLE   AGE    CONTAINERS             IMAGES                                              SELECTOR
+bfybapp                1/1     1            1           82d    bfybapp                acraksworkshop22220.azurecr.io/bestforyororganics   k8s-app=bfybapp
+captureorder           1/1     1            1           155d   captureorder           azch/captureorder                                   app=captureorder
+frontend               1/1     1            1           155d   frontend               azch/frontend                                       app=frontend
+helmappdemo            1/1     1            1           54d    helmappdemo            oaviles/netcoreangularapp:latest                    app.kubernetes.io/instance=helmappdemo,app.kubernetes.io/name=helmappdemo
+javawebapp-v1          1/1     1            1           20d    web                    acraksworkshop22220.azurecr.io/javawebapp:latest    app=javawebapp-v1
+knote-jsv1             1/1     1            1           125d   webappnodejsv1         acraksworkshop22220.azurecr.io/knote-js             app=knote-jsv1
+netcoreangularapp      1/1     1            1           78d    netcoreangularapp      oaviles/netcoreangularapp                           k8s-app=netcoreangularapp
+orders-mongo-mongodb   1/1     1            1           155d   orders-mongo-mongodb   docker.io/bitnami/mongodb:4.0.13-debian-9-r22       app=mongodb,release=orders-mongo

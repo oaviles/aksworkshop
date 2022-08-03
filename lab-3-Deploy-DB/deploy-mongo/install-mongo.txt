@@ -1,0 +1,19 @@
+kubectl create -n ratingsapp
+
+helm install ratings bitnami/mongodb \ 
+    --namespace ratingsapp \ 
+    --set auth.username=<username>,auth.password=<password>,auth.database=ratingsdb
+
+helm install ratings bitnami/mongodb \ 
+    --namespace ratingsapp \ 
+    --set auth.username=oaviles,auth.password=Pwd01,auth.database=ratingsdb
+
+kubectl create secret generic mongosecret \
+    --namespace ratingsapp \
+    --from-literal=MONGOCONNECTION="mongodb://oaviles:Pwd01@ratings-mongodb.ratingsapp:27017/ratingsdb"
+
+
+kubectl create secret generic mongosecret \
+    --namespace ratingsapp \
+    --from-literal=MONGOCONNECTION="mongodb://oaviles:Pwd01@ratings-mongodb.ratingsapp:27017/ratingsdb" \
+    -o yaml > mongodb-deploy.yaml --dry-run

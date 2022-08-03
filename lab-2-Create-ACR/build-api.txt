@@ -1,0 +1,10 @@
+git clone https://github.com/MicrosoftDocs/mslearn-aks-workshop-ratings-api.git
+
+az acr build \
+    --resource-group $RESOURCE_GROUP \
+    --registry $ACR_NAME \
+    --image ratings-api:v1 .
+
+     . = Dockerfile
+
+     

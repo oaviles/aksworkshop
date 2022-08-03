@@ -1,0 +1,14 @@
+az acr create \
+    --resource-group $RESOURCE_GROUP \
+    --location $REGION_NAME \
+    --name $ACR_NAME \
+    --sku Standard
+
+
+az acr create \
+    --resource-group $RESOURCE_GROUP \
+    --location $REGION_NAME \
+    --name $ACR_NAME \
+    --sku Basic
+
+https://docs.microsoft.com/en-us/cli/azure/acr?view=azure-cli-latest

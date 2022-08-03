@@ -1,0 +1,3 @@
+kubectl create deploy webapp -n ratingsapp --image=acrname.azurecr.io/ratings-web:v1 -o yaml --dry-run > webapp-deploy1.yaml
+
+kubectl expose deploy webapp -n ratingsapp -o yaml --dry-run > webapp-service1.yaml

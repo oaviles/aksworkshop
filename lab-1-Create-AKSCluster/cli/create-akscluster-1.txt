@@ -1,0 +1,22 @@
+az group create --name AKSW --location eastus2
+
+az aks create \
+    --resource-group myResourceGroup \
+    --name AKSCluster \
+    --node-count 1 \
+    --generate-ssh-keys
+
+az aks create \
+    --resource-group myResourceGroup \
+    --name AKSCluster \
+    --node-count 1 \
+    --enable-addons monitoring \ 
+    --generate-ssh-keys
+
+
+    az aks create \
+    --resource-group AKSW \
+    --name AKSCluster01 \
+    --node-count 1 \
+    --enable-addons monitoring \ 
+    --generate-ssh-keys

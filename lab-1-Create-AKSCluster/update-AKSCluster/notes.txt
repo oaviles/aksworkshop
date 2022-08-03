@@ -1,0 +1,52 @@
+
+----------- Patch and upgrade an AKS cluster -----------
+Reference: https://docs.microsoft.com/en-us/learn/modules/aks-cluster-upgrades-patches/5-exercise-upgrade-aks-clusters
+
+az aks get-versions -l westus -o table
+
+KV=1.21.9
+
+CLUSTERNAME=AKSCluster-Demo
+
+az aks create -n $CLUSTERNAME -g $RG --kubernetes-version $KV --generate-ssh-keys
+
+az aks show -n $CLUSTERNAME -g $RG -o table
+
+
+Name             Location    ResourceGroup    KubernetesVersion    CurrentKubernetesVersion    ProvisioningState    Fqdn
+---------------  ----------  ---------------  -------------------  --------------------------  -------------------  -----------------------------------------------------------
+AKSCluster-Demo  eastus      IaC_Workshop     1.21.9               1.21.9                      Succeeded            akscluster-iacworkshop-387995-737d1fe2.hcp.eastus.azmk8s.io
+
+----------- Upgrade the AKS cluster -----------
+
+az aks get-upgrades -n $CLUSTERNAME -g $RG -o table
+
+az aks upgrade -n $CLUSTERNAME -g $RG -k [latest-version] 
+# e.g. 1.23.8
+
+
+# Operation failed with status: 'Bad Request'. Details: Upgrading Kubernetes version 1.21.9 to 1.23.8 is not allowed. Available upgrades: 1.21.14,1.22.6,1.22.11. Please see https://aka.ms/aks-supported-k8s-ver for version details.
+
+----------- Apply patches updates -----------
+
+az aks upgrade -n $CLUSTERNAME -g $RG --no-wait -k [next-patch-version] 
+# e.g. 1.21.14, 1.22.6, 1.22.11
+
+az aks wait -g $RG -n $CLUSTERNAME --update
+
+It is possible to apply upgrades only to the control plane in the AKS cluster or only to the nodes in the AKS cluster by including the optional parameters --control-plane-only or --node-image-only when running the upgrade command. If the optional parameters are not included, both the control plane and nodes in the AKS cluster are upgraded.
+
+az aks show -n $CLUSTERNAME -g $RG -o table
+
+Name             Location    ResourceGroup    KubernetesVersion    CurrentKubernetesVersion    ProvisioningState    Fqdn
+---------------  ----------  ---------------  -------------------  --------------------------  -------------------  -----------------------------------------------------------
+AKSCluster-Demo  eastus      IaC_Workshop     1.22.11              1.22.11                     Succeeded            akscluster-iacworkshop-387995-737d1fe2.hcp.eastus.azmk8s.io
+
+----------- Upgrade to the next minor version ----------------
+
+az aks upgrade -n $CLUSTERNAME -g $RG --no-wait -k [next-minor-version] 
+# e.g. 1.23.5
+
+az aks wait -g $RG -n $CLUSTERNAME --update
+
+az aks show -n $CLUSTERNAME -g $RG -o table

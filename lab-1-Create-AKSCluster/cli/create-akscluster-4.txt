@@ -1,0 +1,23 @@
+
+az identity create --name myIdentity --resource-group MyRG
+
+az identity list --query "[].{Name:name, Id:id, Location:location}" -o table
+
+az aks create --resource-group $RESOURCE_GROUP \ 
+--name $AKS_CLUSTER_NAME \ 
+--vm-set-type VirtualMachineScaleSets \ 
+--node-count 2 \ 
+--load-balancer-sku standard \ 
+--location $REGION_NAME \ 
+--kubernetes-version $VERSION \ 
+--network-plugin azure \ 
+--vnet-subnet-id $SUBNET_ID \ 
+--service-cidr 10.2.0.0/24 \ 
+--dns-service-ip 10.2.0.10 \ 
+--docker-bridge-address 172.17.0.1/16 \ 
+--generate-ssh-keys \
+--enable-managed-identity
+
+az aks get-credentials \
+    --resource-group $RESOURCE_GROUP \
+    --name $AKS_CLUSTER_NAME

@@ -1,0 +1,22 @@
+https://docs.microsoft.com/en-us/azure/aks/kubernetes-dashboard
+
+az aks browse --resource-group myResourceGroup --name myAKSCluster
+
+
+Get Token : non-Azure AD enabled cluster
+kubectl -n kube-system get secret
+kubectl -n kube-system describe secret deployment-controller-token-XXXXXX
+
+
+Get Token : Azure AD enabled cluster,
+kubectl config view -o jsonpath='{.users[?(@.name == "clusterUser_<RESOURCE GROUP>_<AKS_NAME>")].user.auth-provider.config.access-token}'
+
+Important Note:
+
+https://docs.microsoft.com/en-us/azure/aks/kubernetes-dashboard#sign-in-to-the-dashboard-kubernetes-116
+
+kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
+
+https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md
+
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')

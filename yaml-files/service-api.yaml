@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: api
+  name: api
+  namespace: ratingsapp
+spec:
+  ports:
+  - name: 7999-80
+    port: 80
+    protocol: TCP
+    targetPort: 7999
+  selector:
+    app: api
+    protocol: TCP
+  type: ClusterIP

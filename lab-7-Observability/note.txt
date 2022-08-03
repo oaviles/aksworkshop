@@ -1,0 +1,25 @@
+RESOURCE_GROUP=ARC_Zone
+WORKSPACE=k8slogs
+AKS_CLUSTER_NAME=AKSCluster-Demo
+
+
+WORKSPACE_ID=$(az resource show --resource-type Microsoft.OperationalInsights/workspaces \
+    --resource-group $RESOURCE_GROUP \
+    --name $WORKSPACE \
+    --query "id" -o tsv)
+
+    az aks enable-addons \
+    --resource-group $RESOURCE_GROUP \
+    --name $AKS_CLUSTER_NAME \
+    --addons monitoring \
+    --workspace-resource-id $WORKSPACE_ID
+
+Enable Monitoring over ARC
+
+https://docs.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-enable-arc-enabled-clusters?toc=/azure/azure-arc/kubernetes/toc.json
+
+Option 2 - With existing Azure Log Analytics workspace
+az k8s-extension create --name azuremonitor-containers --cluster-name <cluster-name> --resource-group <resource-group> --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers --configuration-settings logAnalyticsWorkspaceResourceID=<armResourceIdOfExistingWorkspace>
+
+
+az k8s-extension create --name azuremonitor-containers --cluster-name k8sadmin --resource-group ARC_Zone --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers --configuration-settings logAnalyticsWorkspaceResourceID=/subscriptions/38799598-962d-47e5-beb0-e391ff1577a1/resourcegroups/arc_zone/providers/microsoft.operationalinsights/workspaces/k8slogs

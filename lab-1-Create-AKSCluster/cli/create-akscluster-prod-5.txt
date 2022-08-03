@@ -1,0 +1,23 @@
+az aks create \
+--name $AKS_CLUSTER_NAME \
+--resource-group $RESOURCE_GROUP \
+--vm-set-type VirtualMachineScaleSets \
+--generate-ssh-keys \
+--node-count 3 \
+--load-balancer-sku standard \
+--location $REGION_NAME \
+--kubernetes-version $VERSION \
+--network-plugin azure \
+--vnet-subnet-id $SUBNET_ID \
+--service-cidr 10.2.0.0/24 \
+--dns-service-ip 10.2.0.10 \
+--docker-bridge-address 172.17.0.1/16 \
+--generate-ssh-keys \
+--zones 1 2 3 \
+--attach-acr $ACR_NAME \
+--node-vm-size Standard_DS2_v2 \
+--enable-cluster-autoscaler \
+--max-count 6 \
+--min-count 3 \
+--enable-addons monitoring \
+--uptime-sla

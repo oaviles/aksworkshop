@@ -1,0 +1,14 @@
+Reference : https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-rm-template
+
+ssh-keygen -t rsa -b 2048
+
+Create a service principal
+az ad sp create-for-rbac --skip-assignment
+
+az group create --name AKS-W-rg --location eastus2
+
+az group deployment create --resource-group AKS-W-rg \
+  --template-file akscluster-deploy.json \
+  --parameters akscluster-parameters.json
+
+  az group deployment create --resource-group AKS-W-rg --template-file akscluster-deploy.json --parameters akscluster-parameters.json
