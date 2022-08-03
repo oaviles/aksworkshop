@@ -33,7 +33,7 @@ kubectl create -f pod-deploy.yaml
 
 kubectl create -f pod-service.yaml
 
-k get all
+kubectl get all
 
 Allowed container image regex on Azure Portal Policy Configuration
 .+\.azurecr\.io/.+$
