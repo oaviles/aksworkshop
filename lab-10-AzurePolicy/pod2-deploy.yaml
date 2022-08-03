@@ -1,0 +1,27 @@
+ apiVersion: apps/v1
+ kind: Deployment
+ metadata:
+   name: second-simple-nginx
+   labels:
+     app: second-nginx
+ spec:
+   selector:
+     matchLabels:
+       app: second-nginx
+   template:
+     metadata:
+       labels:
+         app: second-nginx
+     spec:
+       containers:
+       - name: second-simple-nginx
+         image: acraksworkshop.azurecr.io/oapi:7999
+         resources:
+           requests:
+             cpu: 100m
+             memory: 100Mi
+           limits:
+             cpu: 120m
+             memory: 120Mi
+         ports:
+         - containerPort: 80
