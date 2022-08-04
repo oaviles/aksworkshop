@@ -1,5 +1,5 @@
 REGION_NAME=eastus2
-RESOURCE_GROUP=aksworkshop-32004
+RESOURCE_GROUP=aksworkshop-$RANDOM
 SUBNET_NAME=aks-subnet
 VNET_NAME=aks-vnet
 
@@ -61,7 +61,7 @@ az acr create \
 -------------- More Notes --------------
 
 REGION_NAME=eastus
-RESOURCE_GROUP=aksworkshopalestra
+RESOURCE_GROUP=aksworkshop-$RANDOM
 SUBNET_NAME=aks-subnet
 VNET_NAME=aks-vnet
 

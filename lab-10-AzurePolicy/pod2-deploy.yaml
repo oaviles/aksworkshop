@@ -15,7 +15,7 @@
      spec:
        containers:
        - name: second-simple-nginx
-         image: acraksworkshop.azurecr.io/oapi:7999
+         image: youracrname.azurecr.io/oapi:7999
          resources:
            requests:
              cpu: 100m

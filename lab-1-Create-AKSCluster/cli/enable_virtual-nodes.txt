@@ -61,7 +61,7 @@ az aks create \
     --docker-bridge-address 172.17.0.1/16 \
     --vnet-subnet-id $SUBNET_ID \
     --service-principal 00000000-0000-0000-0000-000000000000 \
-    --client-secret xXXXXxxxXxXXxXx.0x~0X0xXxxX0XX0XO.
+    --client-secret xXXXXxxxXxXXxXx.0x~0X0xXxxX0XX0XX.
 
 ---------------------------------------
 

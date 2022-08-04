@@ -39,7 +39,7 @@ az aks enable-addons \
 -------------- More Notes -----------------
 
 
-RESOURCE_GROUP=ARC_Zone
+RESOURCE_GROUP=aksworkshop
 WORKSPACE=k8slogs
 AKS_CLUSTER_NAME=AKSCluster-Demo
 
@@ -63,4 +63,4 @@ Option 2 - With existing Azure Log Analytics workspace
 az k8s-extension create --name azuremonitor-containers --cluster-name <cluster-name> --resource-group <resource-group> --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers --configuration-settings logAnalyticsWorkspaceResourceID=<armResourceIdOfExistingWorkspace>
 
 
-az k8s-extension create --name azuremonitor-containers --cluster-name k8sadmin --resource-group ARC_Zone --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers --configuration-settings logAnalyticsWorkspaceResourceID=/subscriptions/38799598-962d-47e5-beb0-e391ff1577a1/resourcegroups/arc_zone/providers/microsoft.operationalinsights/workspaces/k8slogs
+az k8s-extension create --name azuremonitor-containers --cluster-name $AKS_CLUSTER_NAME --resource-group $RESOURCE_GROUP --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers --configuration-settings logAnalyticsWorkspaceResourceID=/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/aksworkshop/providers/microsoft.operationalinsights/workspaces/k8slogs

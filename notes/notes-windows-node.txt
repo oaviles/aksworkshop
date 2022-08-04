@@ -1,4 +1,4 @@
-RESOURCE_GROUP=IaC_Workshop
+RESOURCE_GROUP=aksworkshop
 CLUSTER_NAME=AKSCluster-Demo
 
 az aks create -g $RESOURCE_GROUP -n $CLUSTER_NAME --node-count 1 --os-sku CBLMariner --load-balancer-sku standard --location eastus2 --network-plugin azure --windows-admin-username localadmin --windows-admin-password 'replacePassword1234$'

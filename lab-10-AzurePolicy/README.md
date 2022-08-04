@@ -2,11 +2,11 @@ Reference: https://docs.microsoft.com/en-us/learn/modules/aks-governance-azure-p
 
 az provider register --namespace Microsoft.PolicyInsights
 
-az group create --location eastus2 --name AKS_Workshop
+az group create --location eastus2 --name aksworkshop
 
-az aks create --name AKSCluster-Demo --resource-group AKS_Workshop
+az aks create --name AKSCluster-Demo --resource-group aksworkshop
 
-az aks enable-addons --addons azure-policy --name AKSCluster-Demo --resource-group IaC_Workshop
+az aks enable-addons --addons azure-policy --name AKSCluster-Demo --resource-group aksworkshop
 
 ------------- Types of Azure Policies for AKS -------------
 
@@ -27,7 +27,7 @@ https://github.com/Azure/azure-policy/blob/master/built-in-policies/policySetDef
 Kubernetes cluster pod security restricted standards for Linux-based workloads: 
 https://github.com/Azure/azure-policy/blob/master/built-in-policies/policySetDefinitions/Kubernetes/Kubernetes_PSPRestrictedStandard.json
 
-az aks get-credentials --resource-group IaC_Workshop --name AKSCluster-Demo
+az aks get-credentials --resource-group aksworkshop --name AKSCluster-Demo
 
 kubectl create -f pod-deploy.yaml
 
@@ -53,7 +53,7 @@ Click the Create button.
 
 ACR_NAME=<< Name of your ACR >>
 
-az aks update -n AKSCluster-Demo -g IaC_Workshop --attach-acr $ACR_NAME
+az aks update -n AKSCluster-Demo -g aksworkshop --attach-acr $ACR_NAME
 
 kubectl get ConstraintTemplates
 

@@ -2,7 +2,7 @@ REGION_NAME=eastus
 RESOURCE_GROUP=aksworkshop-$RANDOM
 SUBNET_NAME=aks-subnet
 VNET_NAME=aks-vnet
-AKS_CLUSTER_NAME=aksworkshop-$RANDOM
+AKS_CLUSTER_NAME=AKSCluster-Demo-$RANDOM
 ACR_NAME=acr$RANDOM
 
 az group create \
