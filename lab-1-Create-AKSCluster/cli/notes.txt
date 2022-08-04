@@ -23,3 +23,19 @@ az aks create \
 --docker-bridge-address 172.17.0.1/16 \
 --generate-ssh-keys
 
+
+az aks get-credentials \
+    --resource-group $RESOURCE_GROUP \
+    --name $AKS_CLUSTER_NAME
+
+az aks get-credentials --resource-group AKSW --name AKSCluster
+
+Reference: kubectl Cheat Sheet
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/ 
+
+kubectl --help
+kubectl create --help
+
+kubectl explain --help
+kubectl explain pods
+

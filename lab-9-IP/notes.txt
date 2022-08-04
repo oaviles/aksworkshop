@@ -11,8 +11,8 @@ az network public-ip create \
     az ad sp create-for-rbac --skip-assignment --name AKSClusterServicePrincipal
 
     az role assignment create \
-    --assignee 1444e826-57de-4fb2-990c-24ce26c2f007 \
+    --assignee 00000000-0000-0000-0000-000000000000 \
     --role "Network Contributor" \
-    --scope /subscriptions/38799598-962d-47e5-beb0-e391ff1577a1/resourceGroups/AKS_Zone
+    --scope /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/aksworkshop
 
 

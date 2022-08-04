@@ -19,7 +19,7 @@ spec:
         app: webapp
     spec:
       containers:
-      - image: acrname.azurecr.io/ratings-web:v1
+      - image: youracrname.azurecr.io/ratings-web:v1
         name: ratings-web
         resources: {}
 status: {}

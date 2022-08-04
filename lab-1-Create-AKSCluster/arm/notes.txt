@@ -12,3 +12,5 @@ az group deployment create --resource-group AKS-W-rg \
   --parameters akscluster-parameters.json
 
   az group deployment create --resource-group AKS-W-rg --template-file akscluster-deploy.json --parameters akscluster-parameters.json
+
+az ad sp create-for-rbac --skip-assignment

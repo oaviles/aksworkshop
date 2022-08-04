@@ -1,3 +1,44 @@
+Azure Monitor for containers overview
+
+https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-overview?toc=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Fazure%2Faks%2Ftoc.json&bc=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Fazure%2Fbread%2Ftoc.json
+
+Enable Azure Monitor for containers
+https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-onboard
+
+
+Create a Log Analytics workspace
+
+WORKSPACE=aksworkshop-workspace-$RANDOM
+
+
+az resource create --resource-type Microsoft.OperationalInsights/workspaces \
+        --name $WORKSPACE \
+        --resource-group $RESOURCE_GROUP \
+        --location $REGION_NAME \
+        --properties '{}' -o table
+
+az resource create --resource-type Microsoft.OperationalInsights/workspaces \
+        --name $WORKSPACE \
+        --resource-group $RESOURCE_GROUP \
+        --location $REGION_NAME \
+        --properties '{}' -o table
+
+Enable the AKS monitoring add-on
+
+WORKSPACE_ID=$(az resource show --resource-type Microsoft.OperationalInsights/workspaces \
+    --resource-group $RESOURCE_GROUP \
+    --name $WORKSPACE \
+    --query "id" -o tsv)
+
+az aks enable-addons \
+    --resource-group $RESOURCE_GROUP \
+    --name $AKS_CLUSTER_NAME \
+    --addons monitoring \
+    --workspace-resource-id $WORKSPACE_ID
+
+-------------- More Notes -----------------
+
+
 RESOURCE_GROUP=ARC_Zone
 WORKSPACE=k8slogs
 AKS_CLUSTER_NAME=AKSCluster-Demo

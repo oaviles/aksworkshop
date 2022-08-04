@@ -1,0 +1,3 @@
+https://github.com/MicrosoftDocs/mslearn-aks-workshop-ratings-api
+
+https://github.com/MicrosoftDocs/mslearn-aks-workshop-ratings-web

@@ -6,14 +6,14 @@ helm install ratings bitnami/mongodb \
 
 helm install ratings bitnami/mongodb \ 
     --namespace ratingsapp \ 
-    --set auth.username=oaviles,auth.password=Pwd01,auth.database=ratingsdb
+    --set auth.username=usr01,auth.password=Pwd01,auth.database=ratingsdb
 
 kubectl create secret generic mongosecret \
     --namespace ratingsapp \
-    --from-literal=MONGOCONNECTION="mongodb://oaviles:Pwd01@ratings-mongodb.ratingsapp:27017/ratingsdb"
+    --from-literal=MONGOCONNECTION="mongodb://usr01:Pwd01@ratings-mongodb.ratingsapp:27017/ratingsdb"
 
 
 kubectl create secret generic mongosecret \
     --namespace ratingsapp \
-    --from-literal=MONGOCONNECTION="mongodb://oaviles:Pwd01@ratings-mongodb.ratingsapp:27017/ratingsdb" \
+    --from-literal=MONGOCONNECTION="mongodb://usr01:Pwd01@ratings-mongodb.ratingsapp:27017/ratingsdb" \
     -o yaml > mongodb-deploy.yaml --dry-run

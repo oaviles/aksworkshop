@@ -24,13 +24,13 @@
       "value": "azureuser"
     },
     "sshRSAPublicKey": {
-      "value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC2jMIAn4cLG4OP52d5YGgehC/7K7aXtKZGs7fC4NTAV5ZbwQa+7blyQtEUYzzBgBTDhFSCR2iZyYHMU6wIeB2DzRSu6ipDEf01ltdXqDZqKW1OJsHy2gPVvaWZZVSXTBpSgohPzdCbNR+AQ10euhQZnHlI05uNFKbl1BTxh9GJBpMtpc0xrVQmEMXbsQOORgeBq2de9TAqKnCRNOEG4XP98yYbKC53Na3JCl+Y4qcYI8F21C545ZCWNZAXYMYKHtleGHXZmcluGbiUsteoiZlpvToQACHdZJXaXs+F40bskD9CRwL5stEVTzduODU7ODDyE0iS20CBqTOmX8eOHM4p omar@cc-96724f19-79798cf445-lmptf"
+      "value": "your ssh-rsa key"
     },
     "servicePrincipalClientId": {
-      "value": "c3459475-e846-4905-b199-63c264928421"
+      "value": ""
     },
     "servicePrincipalClientSecret": {
-      "value": "0QT4qx-qg-BlLld5Ur61dyWfyoX03zVE.1"
+      "value": ""
     },
     "osType": {
       "value": "Linux"

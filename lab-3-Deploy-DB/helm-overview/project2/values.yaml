@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: acr692.azurecr.io/api
+  repository: youracrname.azurecr.io/api
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v1"
@@ -21,7 +21,7 @@ serviceAccount:
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: "demoapp2-gbm"
+  name: "demoapp2"
 
 podAnnotations: {}
 

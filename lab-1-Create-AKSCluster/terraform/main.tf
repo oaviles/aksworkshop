@@ -8,6 +8,6 @@ terraform {
     resource_group_name   = "terraformrg"
     storage_account_name  = "tftemplatesmx"
     container_name        = "tftemplates"
-    key                   = "yKQVLFlPgf38oImxZ3SsQGPT2DZKX8G5PS3+QWNJD5NwVPl0wKFHhW6fANLyTvPSjmJsq7a/XNpIVaJTRe16RA=="
+    key                   = "your key here"
   }
 }

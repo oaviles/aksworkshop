@@ -19,7 +19,7 @@ spec:
         app: api
     spec:
       containers:
-      - image: acr692.azurecr.io/api:latest
+      - image: youracrname.azurecr.io/api:latest
         name: api
         ports:
         - containerPort: 7999

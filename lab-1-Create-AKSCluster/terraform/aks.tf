@@ -33,8 +33,8 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   }
 
 service_principal {
-    client_id     = "e89dfabc-6888-4a42-b14e-ff27b2ec36ae"
-    client_secret = "fd85da7c-578c-48c8-83e3-f23a726fea4c"
+    client_id     = "00000000-0000-0000-0000-000000000000"
+    client_secret = "00000000-0000-0000-0000-000000000000"
   }
 
 }

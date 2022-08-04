@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: ratings-api
-        image: akswcr.azurecr.io/akspoccluster:v1 # IMPORTANT: update with your own repository
+        image: youracrname.azurecr.io/akspoccluster:v1 # IMPORTANT: update with your own repository
         imagePullPolicy: Always
         ports:
         - containerPort: 3000 # the application listens to this port

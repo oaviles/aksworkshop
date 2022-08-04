@@ -33,7 +33,8 @@ az ad sp create-for-rbac --skip-assignment
 
 VNET_ID=$(az network vnet show --resource-group $RESOURCE_GROUP --name $VNET_NAME --query id -o tsv)
 
-az role assignment create --assignee d011d8c8-17b3-4735-a00e-aef90e487cdb --scope $VNET_ID --role Contributor
+az role assignment create --assignee sp_name --role a_role
+az role assignment create --assignee 00000000-0000-0000-0000-000000000000 --scope $VNET_ID --role Contributor
 
 VERSION=$(az aks get-versions \
     --location $REGION_NAME \
@@ -59,8 +60,8 @@ az aks create \
     --dns-service-ip 10.0.0.10 \
     --docker-bridge-address 172.17.0.1/16 \
     --vnet-subnet-id $SUBNET_ID \
-    --service-principal d011d8c8-17b3-4735-a00e-aef90e487cdb \
-    --client-secret aFKIDicpZaLBqKk.7g~1T8qJsjQ0OB5ZO.
+    --service-principal 00000000-0000-0000-0000-000000000000 \
+    --client-secret xXXXXxxxXxXXxXx.0x~0X0xXxxX0XX0XO.
 
 ---------------------------------------
 

@@ -15,8 +15,8 @@ spec:
         memory: 256Mi
     volumeMounts:
     - mountPath: "/mnt/azure"
-      name: gbmvolume
+      name: demovolume
   volumes:
-    - name: gbmvolume
+    - name: demovolume
       persistentVolumeClaim:
-        claimName: gbm-managed-disk
+        claimName: demo-managed-disk
