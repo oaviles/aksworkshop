@@ -5,7 +5,7 @@ In this workshop, you'll go through tasks to deploy a multicontainer application
 Learning objectives
 In this module, you will:
 
-* ![Create an Azure Kubernetes Service cluster](./lab-1-Create-AKSCluster)
+* [Create an Azure Kubernetes Service cluster](./lab-1-Create-AKSCluster)
 * Choose the best deployment options for your Pods
 * Expose Pods to internal and external network users
 * Configure SSL/TLS for Azure Kubernetes Service ingress
